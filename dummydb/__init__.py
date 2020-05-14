@@ -1,1 +1,1 @@
-from .ddb import DummyDB
+from .ddb import DummyDB, DummyDBException
