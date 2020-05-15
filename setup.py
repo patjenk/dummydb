@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="dummydb",
-    version="0.0.1",
+    version="0.0.2",
     description="An inefficient and error prone database written in python for prototyping python projects.",
     url="https://github.com/patjenk/dummydb",
     author="Patrick Jenkins",
