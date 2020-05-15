@@ -1,12 +1,10 @@
-from json import dumps, loads
-
+from .serializer import dumps, loads
 
 class DummyDBException(Exception):
     pass
 
 
 class DummyDB():
-    filehandle = None
     data = None
 
     def __init__(self, filename=None):
@@ -16,15 +14,21 @@ class DummyDB():
             self.data = {}
 
     def load_from_disk(self, filename):
-        self.filehandle = open(filename, "r")
-        self.filehandle.seek(0)
-        self.data = json.loads(self.filehandle.read())
-        self.filehandle.close()
+        filehandle = open(filename, "r")
+        self.load_from_filehandle(filehandle)
+        filehandle.close()
+
+    def load_from_filehandle(self, filehandle):
+        filehandle.seek(0)
+        self.data = loads(filehandle.read())
 
     def write_to_disk(self, filename):
-        self.filehandle = open(filename, "w")
-        self.filehandle.write(dumps(self.data))
-        self.filehandle.close()
+        filehandle = open(filename, "w")
+        self.write_to_filehandle(filehandle)
+        filehandle.close()
+
+    def write_to_filehandle(self, filehandle):
+        filehandle.write(dumps(self.data))
 
     def create_table(self, table_name, columns):
         """
